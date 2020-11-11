@@ -1,11 +1,11 @@
 // app/Main.js
 import React from 'react';
-import { StyleSheet, Text, View, StatusBar } from 'react-native';
+import { StyleSheet} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient'
 import { gradientStart, gradientEnd } from './utils/Colors';
-import Header from './components/Header';
+import HomeScreen from './components/HomeScreen';
 import Input from './components/Input';
-const headerTitle = 'To Do';
+let headerTitle = 'GAINS';
 export default class Main extends React.Component {
     state = {
         inputValue: ''
@@ -18,18 +18,7 @@ export default class Main extends React.Component {
     render() {
         const { inputValue } = this.state;
         return (
-            <LinearGradient
-                colors={[gradientStart, gradientEnd]}
-                style={styles.container}
-            >
-                <StatusBar barStyle="light-content" />
-                <View style={styles.centered}>
-                    <Header title={headerTitle} />
-                </View>
-                <View style={styles.inputContainer}>
-                    <Input inputValue={inputValue} onChangeText={this.newInputValue} />
-                </View>
-            </LinearGradient>
+               <HomeScreen title={headerTitle}/>
         );
     }
 }
