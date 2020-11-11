@@ -1,9 +1,7 @@
 // app/Main.js
 import React from 'react';
 import { StyleSheet} from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient'
-import { gradientStart, gradientEnd } from './utils/Colors';
-import HomeScreen from './components/HomeScreen';
+import HomeScreen from './Screens/HomeScreen';
 import Input from './components/Input';
 let headerTitle = 'GAINS';
 export default class Main extends React.Component {
