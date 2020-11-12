@@ -1,7 +1,26 @@
 import React from 'react';
 import {View, Text, StyleSheet, Image, Button, Alert, TouchableOpacity} from 'react-native';
+import Modal from 'react-native-modal';
 
-const HomeScreen = ({ navigation }) => {
+
+class HomeScreen extends React.Component {
+    constructor(props) {
+        super(props);
+        console.log(this.props)
+        this.state = {isModalVisible: false};
+    }
+
+
+    toggleModal() {
+        if (this.state.isModalVisible == true) {
+            this.setState({isModalVisible: false})
+        } else {
+            this.setState({isModalVisible: true})
+
+        }
+    }
+
+    render() {
         return (
             <View style={styles.headerContainer}>
                 <Text style={styles.headerText}>{'GAINS'}</Text>
@@ -10,9 +29,9 @@ const HomeScreen = ({ navigation }) => {
                     <Button
                         color={'white'}
                         title="Create workout or lift"
-                        onPress={() =>  navigation.navigate('Create Lift', {items: [
-                                "name",
-                                "name"
+                        onPress={() => this.props.navigation.navigate('Create Lift', {
+                            items: [
+                                "lift"
                             ]
                         })}
                     />
@@ -21,9 +40,9 @@ const HomeScreen = ({ navigation }) => {
                     <Button
                         color={'white'}
                         title="Workouts"
-                        onPress={() => Alert.alert(
-                            'This works')}
+                        onPress={() => this.toggleModal()}
                     /></View>
+
                 <View style={styles.button}>
                     <Button
                         color={'white'}
@@ -44,8 +63,16 @@ const HomeScreen = ({ navigation }) => {
 
         );
     };
+}
 
 const styles = StyleSheet.create({
+
+    modal: {
+        backgroundColor: 'white',
+        margin: 15,
+        alignItems: undefined,
+        justifyContent: undefined,
+    },
     headerContainer: {
         marginTop: 40,
         marginBottom: 50,
@@ -61,6 +88,12 @@ const styles = StyleSheet.create({
         padding: 10,
         borderRadius: 1,
         backgroundColor: 'black'
+    },
+    modalExit: {
+        color: 'black',
+        fontSize: 40,
+        fontWeight: "bold",
+        textAlign: 'right'
     }
 });
 export default HomeScreen;

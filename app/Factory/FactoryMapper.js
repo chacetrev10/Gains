@@ -1,11 +1,11 @@
-import NameFactory from "./Name";
+import LiftFactory from "./Lift";
 
 class FactoryMapper {
     constructor() {
-        const nameFactory = new NameFactory();
+        const liftFactory = new LiftFactory();
 
         this.factories = {};
-        this.factories[nameFactory.type] = nameFactory;
+        this.factories[liftFactory.type] = liftFactory;
     }
 
     factory = type => type && this.factories[type];

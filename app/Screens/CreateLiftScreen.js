@@ -4,7 +4,6 @@ import Factory from "../Factory/Factory";
 class  CreateLiftScreen extends Component {
     constructor(props) {
         super(props);
-
         this.factory = new Factory();
 
     }
