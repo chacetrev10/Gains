@@ -13,11 +13,9 @@ class Lift extends Component {
     constructor(props,{ type }) {
         super(props);
         this.type = type;
-        this.state = { name: '' }
+        this.state = { name: '',description: '' , pr: '', submitDisabled: true }
         this.handleNameChange = this.handleNameChange.bind(this);
-        this.state = { description: '' }
         this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
-        this.state = { pr: '' }
         this.handlePRChange = this.handlePRChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -30,11 +28,15 @@ class Lift extends Component {
     }
 
     handleNameChange(name) {
-        this.setState({ name });
+        if(name != null) {
+            let submitValid = this.state.submitDisabled
+            this.setState({name});
+            this.setState({submitDisabled: !submitValid});
+        }
     }
 
     handleDescriptionChange(desc) {
-        this.setState({ desc });
+        this.setState({ description :desc});
     }
 
     handlePRChange(pr) {
@@ -78,6 +80,7 @@ class Lift extends Component {
                     <TouchableOpacity
                         style={styles.saveButton}
                         onPress={this.handleSubmit}
+                        disabled={this.state.submitDisabled}
                     >
                         <Text style={styles.saveButtonText}>{'Save'}</Text>
                     </TouchableOpacity>
@@ -92,8 +95,8 @@ class Lift extends Component {
 const styles = StyleSheet.create({
     saveButton: {
         borderWidth: 1,
-        borderColor: '#007BFF',
-        backgroundColor: '#007BFF',
+        borderColor: 'black',
+        backgroundColor: 'black',
         padding: 15,
         margin: 5
     },
