@@ -8,7 +8,6 @@ class  CreateLiftScreen extends Component {
 
     }
     render (){
-        console.log(this.props);
         let {items} = this.props.route.params;
 
         let components = items.map(item =>

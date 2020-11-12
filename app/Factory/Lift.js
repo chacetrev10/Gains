@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import {Keyboard, TextInput, View, Button, TouchableOpacity, StyleSheet} from "react-native";
+import {Keyboard, TextInput, View, Button, TouchableOpacity, StyleSheet, Text} from "react-native";
 import { Input } from 'react-native-elements';
-import Text from "react-native-web/dist/exports/Text";
 
 
 class Lift extends Component {
@@ -80,7 +79,7 @@ class Lift extends Component {
                         style={styles.saveButton}
                         onPress={this.handleSubmit}
                     >
-                        <Text style={styles.saveButtonText}>Save</Text>
+                        <Text style={styles.saveButtonText}>{'Save'}</Text>
                     </TouchableOpacity>
                 </View>
 
