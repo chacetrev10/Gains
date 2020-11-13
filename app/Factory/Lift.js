@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Keyboard, TextInput, View, Button, TouchableOpacity, StyleSheet, Text} from "react-native";
 import { Input } from 'react-native-elements';
+import {saveLift,loadLift} from "../Storage/saveLifts";
 
 
 class Lift extends Component {
@@ -13,7 +14,7 @@ class Lift extends Component {
     constructor(props,{ type }) {
         super(props);
         this.type = type;
-        this.state = { name: '',description: '' , pr: '', submitDisabled: true }
+        this.state = { name: '',description: '' , pr: '' };
         this.handleNameChange = this.handleNameChange.bind(this);
         this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
         this.handlePRChange = this.handlePRChange.bind(this);
@@ -28,15 +29,11 @@ class Lift extends Component {
     }
 
     handleNameChange(name) {
-        if(name != null) {
-            let submitValid = this.state.submitDisabled
-            this.setState({name});
-            this.setState({submitDisabled: !submitValid});
-        }
+        this.setState({name});
     }
 
-    handleDescriptionChange(desc) {
-        this.setState({ description :desc});
+    handleDescriptionChange(description) {
+        this.setState({ description});
     }
 
     handlePRChange(pr) {
@@ -44,7 +41,15 @@ class Lift extends Component {
     }
 
     handleSubmit() {
-       console.log(this.state);
+        console.log(this.state.name);
+        if(this.state.name.length > 0) {
+            saveLift(this.state);
+        }
+    }
+
+    async printLifts() {
+        const current = await loadLift();
+        console.log(current);
     }
 
 
@@ -80,9 +85,16 @@ class Lift extends Component {
                     <TouchableOpacity
                         style={styles.saveButton}
                         onPress={this.handleSubmit}
-                        disabled={this.state.submitDisabled}
                     >
                         <Text style={styles.saveButtonText}>{'Save'}</Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.inputContainer}>
+                    <TouchableOpacity
+                        style={styles.saveButton}
+                        onPress={this.printLifts}
+                    >
+                        <Text style={styles.saveButtonText}>{'print'}</Text>
                     </TouchableOpacity>
                 </View>
 
