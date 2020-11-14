@@ -6,7 +6,7 @@ class Factory {
     }
 
     create({ item }) {
-        let type  = item;
+        const { type } = item;
         const factory = this.factoryMapper.factory(type);
         return factory.create({ item });
     }

@@ -1,6 +1,5 @@
 import React from 'react';
 import {View, Text, StyleSheet, Image, Button, Alert, TouchableOpacity} from 'react-native';
-import Modal from 'react-native-modal';
 
 
 class HomeScreen extends React.Component {
@@ -31,7 +30,9 @@ class HomeScreen extends React.Component {
                         title="Create workout or lift"
                         onPress={() => this.props.navigation.navigate('Create Lift', {
                             items: [
-                                "lift"
+                                {
+                                    "type": "lift"
+                                }
                             ]
                         })}
                     />
@@ -47,8 +48,7 @@ class HomeScreen extends React.Component {
                     <Button
                         color={'white'}
                         title="Lifts"
-                        onPress={() => Alert.alert(
-                            'This works')}
+                        onPress={() => this.props.navigation.navigate('Lift List')}
                     /></View>
                 <View style={styles.button}>
                     <Button

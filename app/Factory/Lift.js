@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Keyboard, TextInput, View, Button, TouchableOpacity, StyleSheet, Text} from "react-native";
 import { Input } from 'react-native-elements';
-import {saveLift,loadLift} from "../Storage/saveLifts";
+import {saveLift,loadLift,removeItemValue} from "../Storage/saveLifts";
 
 
 class Lift extends Component {
@@ -10,6 +10,7 @@ class Lift extends Component {
     type;
     goalWeight;
     currentWeightPr;
+    lifts;
 
     constructor(props,{ type }) {
         super(props);
@@ -19,6 +20,8 @@ class Lift extends Component {
         this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
         this.handlePRChange = this.handlePRChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        // removeItemValue("bench").then(r => {});
+        // removeItemValue("undefined").then(r => {});
     }
 
     setData(data){
@@ -41,18 +44,13 @@ class Lift extends Component {
     }
 
     handleSubmit() {
-        console.log(this.state.name);
         if(this.state.name.length > 0) {
-            saveLift(this.state);
+            const name = this.state.name;
+            const liftCard = {};
+            liftCard[name]= this.state;
+            saveLift(liftCard);
         }
     }
-
-    async printLifts() {
-        const current = await loadLift();
-        console.log(current);
-    }
-
-
 
     getTime(){
         let dateObj = new Date();
@@ -89,15 +87,6 @@ class Lift extends Component {
                         <Text style={styles.saveButtonText}>{'Save'}</Text>
                     </TouchableOpacity>
                 </View>
-                <View style={styles.inputContainer}>
-                    <TouchableOpacity
-                        style={styles.saveButton}
-                        onPress={this.printLifts}
-                    >
-                        <Text style={styles.saveButtonText}>{'print'}</Text>
-                    </TouchableOpacity>
-                </View>
-
             </View>
 
         );
@@ -120,12 +109,4 @@ const styles = StyleSheet.create({
 });
 
 
-class LiftFactory {
-    get type() { return 'lift'; }
-
-    create({ item }) {
-        return <Lift key = {item} item={item} />;
-    }
-}
-
-export default LiftFactory;
+export default Lift;

@@ -6,6 +6,7 @@ import CreateLiftScreen from "./app/Screens/CreateLiftScreen"
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import 'react-native-gesture-handler';
+import LiftListScreen from "./app/Screens/LiftListScreen";
 
 const Stack = createStackNavigator();
 
@@ -22,7 +23,11 @@ export default class App extends React.Component {
                       name="Create Lift"
                       component={CreateLiftScreen}
                   />
-              </Stack.Navigator>
+              <Stack.Screen
+                  name="Lift List"
+                  component={LiftListScreen}
+              />
+          </Stack.Navigator>
           </NavigationContainer>
       );
   }

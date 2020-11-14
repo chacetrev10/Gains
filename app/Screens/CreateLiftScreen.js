@@ -12,7 +12,6 @@ class  CreateLiftScreen extends Component {
 
         let components = items.map(item =>
             this.factory.create({ item }));
-
         return (
             <View>
                 {components}
