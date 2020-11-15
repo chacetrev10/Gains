@@ -18,7 +18,14 @@ class LiftCard extends Component {
         }
         return ;
     }
-
+    showMuscleGroup(){
+        if (this.props.item.muscleGroup && this.props.item.muscleGroup.length > 0) {
+            return <Text style={{marginBottom: 10}}>
+                Muscle Groups: {JSON.stringify(this.props.item.muscleGroup)}
+            </Text>;
+        }
+        return ;
+    }
    showPr(){
         if (this.props.item.pr.length > 0) {
             return <Text style={{marginBottom: 10}}>
@@ -36,6 +43,7 @@ class LiftCard extends Component {
                     <Card.Title>{this.props.item.name}</Card.Title>
                     <Card.Divider/>
                     {this.showDescription()}
+                    {this.showMuscleGroup()}
                     {this.showPr()}
                 </Card>
             </View>

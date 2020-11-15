@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, ScrollView} from 'react-native';
 
 import {loadLift, getAllLifts} from "../Storage/saveLifts";
 import Factory from "../Factory/Factory";
@@ -16,7 +16,8 @@ class LiftListScreen extends React.Component {
         this.liftCards = [];
         this.factory = new Factory();
         this.state = {
-            liftCards: []
+            liftCards: [],
+            actualCards:[]
         };
     }
 
@@ -31,25 +32,31 @@ class LiftListScreen extends React.Component {
 
     componentDidMount() {
         this.getAllLiftsTem().then(r => {
+            let currentLift;
             for (let key of r) {
                 this.getLift(key).then(lift => {
-                        if (lift != undefined) {
-                            const item = lift[key];
+                        const item = lift[key];
+                        if (item != undefined) {
                             item['type'] = 'liftCard';
                             this.liftCards.push(this.factory.create({item}));
                             this.setState({liftCards: this.liftCards});
                         }
+                    console.log(this.liftCards);
                     }
+
                 );
+
             }
+
         });
     }
 
     render() {
         return (
-            <View>
+            <ScrollView>
                 {this.state.liftCards}
-            </View>
+            </ScrollView>
+
         );
 
     }

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import {Keyboard, TextInput, View, Button, TouchableOpacity, StyleSheet, Text} from "react-native";
+import {Keyboard, TextInput, View, TouchableOpacity, StyleSheet, Text} from "react-native";
 import { Input } from 'react-native-elements';
-import {saveLift,loadLift,removeItemValue} from "../Storage/saveLifts";
-
+import {saveLift,removeItemValue} from "../Storage/saveLifts";
+import SelectMultiple from 'react-native-select-multiple'
 
 class Lift extends Component {
     liftName ;
@@ -11,13 +11,15 @@ class Lift extends Component {
     goalWeight;
     currentWeightPr;
     lifts;
-
+    items = ['Chest','Shoulders','Legs','Back','Arms'];
+    selectedItems;
     constructor(props,{ type }) {
         super(props);
         this.type = type;
-        this.state = { name: '',description: '' , pr: '' };
+        this.state = { name: '',description: '' , pr: '' , muscleGroup:[]};
         this.handleNameChange = this.handleNameChange.bind(this);
         this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
+        this.handleMuscleGroupChange = this.handleMuscleGroupChange.bind(this);
         this.handlePRChange = this.handlePRChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         // removeItemValue("bench").then(r => {});
@@ -39,6 +41,11 @@ class Lift extends Component {
         this.setState({ description});
     }
 
+    handleMuscleGroupChange(muscleGroup) {
+        this.selectedItems = muscleGroup;
+        this.setState({ muscleGroup});
+    }
+
     handlePRChange(pr) {
         this.setState({ pr });
     }
@@ -51,6 +58,7 @@ class Lift extends Component {
             saveLift(liftCard);
         }
     }
+
 
     getTime(){
         let dateObj = new Date();
@@ -74,6 +82,11 @@ class Lift extends Component {
                     value={this.state.description}
                     onChangeText={this.handleDescriptionChange}
                 />
+                <Text>Correlating muscle group(s)</Text>
+                <SelectMultiple
+                    items={this.items}
+                    selectedItems={this.selectedItems}
+                    onSelectionsChange={this.handleMuscleGroupChange} />
                 <Input
                     placeholder='Current PR'
                     value={this.state.pr}

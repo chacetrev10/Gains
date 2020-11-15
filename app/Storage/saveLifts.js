@@ -35,9 +35,12 @@ export const getAllLifts = async () => {
     }
 }
 
-export const removeItemValue= async(key)=> {
+export const removeItemValue= async()=> {
     try {
-        await AsyncStorage.removeItem(key);
+        const keys = await AsyncStorage.getAllKeys();
+        for(let key in keys) {
+            await AsyncStorage.removeItem(key);
+        }
         return true;
     }
     catch(exception) {
