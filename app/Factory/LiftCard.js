@@ -41,10 +41,10 @@ class LiftCard extends Component {
             <View >
                 <Card>
                     <Card.Title>{this.props.item.name}</Card.Title>
-                    <Card.Divider/>
-                    {this.showDescription()}
-                    {this.showMuscleGroup()}
-                    {this.showPr()}
+                    {/*<Card.Divider/>*/}
+                    {/*{this.showDescription()}*/}
+                    {/*{this.showMuscleGroup()}*/}
+                    {/*{this.showPr()}*/}
                 </Card>
             </View>
 

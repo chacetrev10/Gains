@@ -11,7 +11,7 @@ class Lift extends Component {
     goalWeight;
     currentWeightPr;
     lifts;
-    items = ['Chest','Shoulders','Legs','Back','Arms','Core'];
+    items = ['Chest','Shoulders','Legs','Back','Arms'];
     selectedItems;
 
     constructor(props, {type}) {
