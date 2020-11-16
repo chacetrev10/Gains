@@ -94,7 +94,7 @@ class Lift extends Component {
                 <Text>Correlating muscle group(s)</Text>
                 <SelectMultiple
                     items={this.items}
-                    selectedItems={this.selectedItems}
+                    selectedItems={this.state.muscleGroup}
                     onSelectionsChange={this.handleMuscleGroupChange}/>
                 <Input
                     placeholder='Current PR'

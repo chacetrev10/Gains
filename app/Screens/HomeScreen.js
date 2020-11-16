@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, Text, StyleSheet, Image, Button, Alert, TouchableOpacity} from 'react-native';
+import {Touchable} from "react-native-web";
 
 
 class HomeScreen extends React.Component {
@@ -21,13 +22,13 @@ class HomeScreen extends React.Component {
 
     render() {
         return (
-            <View style={styles.headerContainer}>
+
+            <View >
                 <Text style={styles.headerText}>{'GAINS'}</Text>
-                <Image style={{width: '100%', height: '40%'}} source={require('../utils/weight.png')}/>
-                <View style={styles.button}>
-                    <Button
-                        color={'white'}
-                        title="Create workout or lift"
+                {/*<Image style={{width: '100%', height: '30%'}} source={require('../utils/weight.png')}/>*/}
+                <View>
+                    <TouchableOpacity
+                        style={styles.Button}
                         onPress={() => this.props.navigation.navigate('Create Lift', {
                             items: [
                                 {
@@ -35,30 +36,35 @@ class HomeScreen extends React.Component {
                                 }
                             ]
                         })}
-                    />
+                        >
+                        <Text style={styles.ButtonText}>{'Create Lift'}</Text>
+                    </TouchableOpacity>
                 </View>
-                <View style={styles.button}>
-                    <Button
-                        color={'white'}
-                        title="Workouts"
-                        onPress={() => this.toggleModal()}
-                    /></View>
-
-                <View style={styles.button}>
-                    <Button
-                        color={'white'}
-                        title="Lifts"
+                <View>
+                    <TouchableOpacity
+                        style={styles.Button}
+                        onPress={() => console.log("touch")}
+                    >
+                        <Text style={styles.ButtonText}>{'My Workouts'}</Text>
+                    </TouchableOpacity>
+                </View>
+                <View>
+                    <TouchableOpacity
+                        style={styles.Button}
                         onPress={() => this.props.navigation.navigate('Lift List')}
-                    /></View>
-                <View style={styles.button}>
-                    <Button
-                        color={'white'}
-                        title="Goals"
+                    >
+                        <Text style={styles.ButtonText}>{'My Lifts'}</Text>
+                    </TouchableOpacity>
+                </View>
+                <View>
+                    <TouchableOpacity
+                        style={styles.Button}
                         onPress={() => Alert.alert(
                             'This works')}
-                    /></View>
-
-
+                    >
+                        <Text style={styles.ButtonText}>{'Goals'}</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
 
         );
@@ -83,17 +89,17 @@ const styles = StyleSheet.create({
         fontWeight: '500',
         textAlign: 'center'
     },
-    button: {
-        marginBottom: 10,
-        padding: 10,
-        borderRadius: 1,
-        backgroundColor: 'black'
+    Button: {
+        borderWidth: 1,
+        borderColor: 'black',
+        backgroundColor: 'black',
+        padding: 15,
+        margin: 5
     },
-    modalExit: {
-        color: 'black',
-        fontSize: 40,
-        fontWeight: "bold",
-        textAlign: 'right'
+    ButtonText: {
+        color: '#FFFFFF',
+        fontSize: 20,
+        textAlign: 'center'
     }
 });
 export default HomeScreen;
