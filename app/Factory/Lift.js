@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Keyboard, TextInput, View, TouchableOpacity, StyleSheet, Text} from "react-native";
 import {Input} from 'react-native-elements';
-import {saveLift, removeItemValue} from "../Storage/saveLifts";
+import {saveLift, removeItemValue, getAllLifts} from "../Storage/saveLifts";
 import SelectMultiple from 'react-native-select-multiple'
 
 class Lift extends Component {
@@ -23,8 +23,15 @@ class Lift extends Component {
         this.handleMuscleGroupChange = this.handleMuscleGroupChange.bind(this);
         this.handlePRChange = this.handlePRChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        // removeItemValue("bench").then(r => {});
-        // removeItemValue("undefined").then(r => {});
+        // getAllLifts().then(r => {
+        //     console.log(r);
+        //     for (let key of r) {
+        //         console.log(key);
+        //         removeItemValue(key).then(r => {
+        //         });
+        //     }
+        // });
+
     }
 
     setData(data) {

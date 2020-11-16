@@ -1,6 +1,6 @@
 import React , {Component} from "react";
 import {StyleSheet, Text, View} from "react-native";
-import { Card, ListItem, Button, Icon } from 'react-native-elements'
+import { Card } from 'react-native-elements'
 
 
 class LiftCard extends Component {
@@ -41,10 +41,10 @@ class LiftCard extends Component {
             <View >
                 <Card>
                     <Card.Title>{this.props.item.name}</Card.Title>
-                    <Card.Divider/>
-                    {this.showDescription()}
-                    {this.showMuscleGroup()}
-                    {this.showPr()}
+                    {/*<Card.Divider/>*/}
+                    {/*{this.showDescription()}*/}
+                    {/*{this.showMuscleGroup()}*/}
+                    {/*{this.showPr()}*/}
                 </Card>
             </View>
 
