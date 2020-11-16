@@ -2,19 +2,9 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 
 export const saveLift = async (lift) => {
-    if (lift[Object.keys(lift)[0]].muscleGroup !== undefined) {
-        let muscleGroups = lift[Object.keys(lift)[0]].muscleGroup;
-        for (let group of muscleGroups) {
-            group = group['value'];
-            let groupList = await AsyncStorage.getItem(group);
-            if (groupList == null) {
-                groupList = [lift];
-            }else {
-                groupList = JSON.parse(groupList);
-                groupList.push(lift);
-            }
-            AsyncStorage.setItem(group, JSON.stringify(groupList));
-        }
+    let key = lift[Object.keys(lift)[0]].name;
+    if(key != undefined) {
+        AsyncStorage.setItem(key, JSON.stringify(lift));
     }
 };
 

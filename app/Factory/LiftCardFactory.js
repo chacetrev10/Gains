@@ -6,8 +6,7 @@ class LiftCardFactory {
     }
 
     create({item}) {
-        const lift = item[Object.keys(item)[0]];
-        return <LiftCard key={lift.name} item={lift}/>;
+        return <LiftCard key={item.name} item={item}/>;
     }
 }
 

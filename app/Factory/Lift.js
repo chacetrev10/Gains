@@ -52,7 +52,11 @@ class Lift extends Component {
 
     handleMuscleGroupChange(muscleGroup) {
         this.selectedItems = muscleGroup;
-        this.setState({muscleGroup});
+        let simplifiedGroups=[];
+        for(let group of muscleGroup){
+            simplifiedGroups.push(group['value']);
+        }
+        this.setState({muscleGroup : simplifiedGroups});
     }
 
     handlePRChange(pr) {
@@ -94,7 +98,7 @@ class Lift extends Component {
                 <Text>Correlating muscle group(s)</Text>
                 <SelectMultiple
                     items={this.items}
-                    selectedItems={this.state.muscleGroup}
+                    selectedItems={this.selectedItems}
                     onSelectionsChange={this.handleMuscleGroupChange}/>
                 <Input
                     placeholder='Current PR'

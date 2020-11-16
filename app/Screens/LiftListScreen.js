@@ -24,13 +24,11 @@ class LiftListScreen extends React.Component {
         let keys = await getAllLifts();
         let liftCards = [];
         for (let key of keys) {
-            let group = await loadLift(key);
-            for (let lift of group) {
-                let item = lift;
-                if (lift != undefined) {
-                    item['type'] = 'liftCard';
-                    liftCards.push(this.factory.create({item}));
-                }
+            let holder = await loadLift(key);
+            const item = holder[key];
+            if (item != undefined) {
+                item['type'] = 'liftCard';
+                liftCards.push(this.factory.create({item}));
 
             }
         }
