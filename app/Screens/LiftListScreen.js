@@ -14,7 +14,7 @@ class LiftListScreen extends React.Component {
     constructor(props) {
         super(props);
         this.liftCards = [];
-        this.factory = new Factory();
+        this.factory = new Factory(props);
         this.state = {
             liftCards: [],
             chestLiftCards: [],

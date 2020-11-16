@@ -28,7 +28,6 @@ export const loadLift = async (key) => {
 export const getAllLifts = async () => {
     try {
         const keys = await AsyncStorage.getAllKeys();
-        console.log(keys);
         return keys;
     } catch (error) {
         console.error(error)

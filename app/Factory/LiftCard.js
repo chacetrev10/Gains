@@ -1,57 +1,63 @@
-import React , {Component} from "react";
-import {StyleSheet, Text, View} from "react-native";
-import { Card } from 'react-native-elements'
+import React, {Component} from "react";
+import {StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import {Card} from 'react-native-elements'
 
 
-class LiftCard extends Component {
-    constructor(props,{type}) {
+class LiftCard extends React.Component {
+    constructor(props, {type}) {
         super(props);
         this.type = type;
     }
 
-    showDescription(){
+    showDescription() {
         if (this.props.item.description.length > 0) {
             return <Text style={{marginBottom: 10}}>
                 Description: {this.props.item.description}
             </Text>
                 ;
         }
-        return ;
+        return;
     }
-    showMuscleGroup(){
+
+    showMuscleGroup() {
         if (this.props.item.muscleGroup && this.props.item.muscleGroup.length > 0) {
             return <Text style={{marginBottom: 10}}>
                 Muscle Groups: {JSON.stringify(this.props.item.muscleGroup)}
             </Text>;
         }
-        return ;
+        return;
     }
-   showPr(){
+
+    showPr() {
         if (this.props.item.pr.length > 0) {
             return <Text style={{marginBottom: 10}}>
                 PR: {this.props.item.pr}
             </Text>;
         }
-        return ;
+        return;
     }
 
 
     render() {
         return (
-            <View >
-                <Card>
-                    <Card.Title>{this.props.item.name}</Card.Title>
-                    {/*<Card.Divider/>*/}
-                    {/*{this.showDescription()}*/}
-                    {/*{this.showMuscleGroup()}*/}
-                    {/*{this.showPr()}*/}
-                </Card>
+            <View>
+                <TouchableOpacity
+                    onPress={() => this.props.props.navigation.navigate('Edit Lift',{
+                        items: this.props.item
+                    })}>
+                    <Card>
+                        <Card.Title>{this.props.item.name}</Card.Title>
+                        {/*<Card.Divider/>*/}
+                        {/*{this.showDescription()}*/}
+                        {/*{this.showMuscleGroup()}*/}
+                        {/*{this.showPr()}*/}
+                    </Card>
+                </TouchableOpacity>
             </View>
 
         )
     }
 }
-const styles = StyleSheet.create({
 
-});
+const styles = StyleSheet.create({});
 export default LiftCard;

@@ -1,8 +1,8 @@
 import FactoryMapper from "./FactoryMapper";
 
-class Factory {
-    constructor() {
-        this.factoryMapper = new FactoryMapper();
+class Factory{
+    constructor(props) {
+        this.factoryMapper = new FactoryMapper(props);
     }
 
     create({ item }) {

@@ -1,10 +1,12 @@
 import LiftFactory from "./LiftFactory";
 import LiftCardFactory from "./LiftCardFactory";
+import React from 'react';
 
-class FactoryMapper {
-    constructor() {
+class FactoryMapper extends React.Component{
+    constructor(props) {
+        super(props);
         const liftFactory = new LiftFactory();
-        const liftCardFactory = new LiftCardFactory();
+        const liftCardFactory = new LiftCardFactory(props);
 
         this.factories = {};
         this.factories[liftFactory.type] = liftFactory;
