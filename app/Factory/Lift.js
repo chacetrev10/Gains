@@ -1,22 +1,23 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {Keyboard, TextInput, View, TouchableOpacity, StyleSheet, Text} from "react-native";
-import { Input } from 'react-native-elements';
-import {saveLift,removeItemValue} from "../Storage/saveLifts";
+import {Input} from 'react-native-elements';
+import {saveLift, removeItemValue} from "../Storage/saveLifts";
 import SelectMultiple from 'react-native-select-multiple'
 
 class Lift extends Component {
-    liftName ;
-    data= {};
+    liftName;
+    data = {};
     type;
     goalWeight;
     currentWeightPr;
     lifts;
-    items = ['Chest','Shoulders','Legs','Back','Arms'];
+    items = ['Chest','Shoulders','Legs','Back','Arms','Core'];
     selectedItems;
-    constructor(props,{ type }) {
+
+    constructor(props, {type}) {
         super(props);
         this.type = type;
-        this.state = { name: '',description: '' , pr: '' , muscleGroup:[]};
+        this.state = {name: '', description: '', pr: '', muscleGroup: []};
         this.handleNameChange = this.handleNameChange.bind(this);
         this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
         this.handleMuscleGroupChange = this.handleMuscleGroupChange.bind(this);
@@ -26,11 +27,12 @@ class Lift extends Component {
         // removeItemValue("undefined").then(r => {});
     }
 
-    setData(data){
+    setData(data) {
         console.log(data);
     }
-    addData(sets,reps){
-        this.data[this.getTime()] = [sets , reps];
+
+    addData(sets, reps) {
+        this.data[this.getTime()] = [sets, reps];
     }
 
     handleNameChange(name) {
@@ -38,38 +40,38 @@ class Lift extends Component {
     }
 
     handleDescriptionChange(description) {
-        this.setState({ description});
+        this.setState({description});
     }
 
     handleMuscleGroupChange(muscleGroup) {
         this.selectedItems = muscleGroup;
-        this.setState({ muscleGroup});
+        this.setState({muscleGroup});
     }
 
     handlePRChange(pr) {
-        this.setState({ pr });
+        this.setState({pr});
     }
 
     handleSubmit() {
-        if(this.state.name.length > 0) {
+        if (this.state.name.length > 0) {
             const name = this.state.name;
             const liftCard = {};
-            liftCard[name]= this.state;
+            liftCard[name] = this.state;
             saveLift(liftCard);
         }
     }
 
 
-    getTime(){
+    getTime() {
         let dateObj = new Date();
         let month = dateObj.getUTCMonth() + 1; //months from 1-12
         let day = dateObj.getUTCDate();
         let year = dateObj.getUTCFullYear();
-        return year.toString()+month.toString()+day.toString()
+        return year.toString() + month.toString() + day.toString()
     }
 
-    render(){
-        return(
+    render() {
+        return (
             <View>
                 <Input
                     placeholder='Lift Name'
@@ -86,7 +88,7 @@ class Lift extends Component {
                 <SelectMultiple
                     items={this.items}
                     selectedItems={this.selectedItems}
-                    onSelectionsChange={this.handleMuscleGroupChange} />
+                    onSelectionsChange={this.handleMuscleGroupChange}/>
                 <Input
                     placeholder='Current PR'
                     value={this.state.pr}

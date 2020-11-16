@@ -12,54 +12,47 @@ class LiftListScreen extends React.Component {
 
     constructor(props) {
         super(props);
-        this.getLift = this.getLift.bind(this);
         this.liftCards = [];
         this.factory = new Factory();
         this.state = {
-            liftCards: [],
-            actualCards:[]
+            liftCards: []
         };
     }
 
-    async getLift(key) {
-        return await loadLift(key);
 
-    }
-
-    async getAllLiftsTem() {
-        return await getAllLifts();
-    }
-
-    componentDidMount() {
-        this.getAllLiftsTem().then(r => {
-            let currentLift;
-            for (let key of r) {
-                this.getLift(key).then(lift => {
-                        const item = lift[key];
-                        if (item != undefined) {
-                            item['type'] = 'liftCard';
-                            this.liftCards.push(this.factory.create({item}));
-                            this.setState({liftCards: this.liftCards});
-                        }
-                    console.log(this.liftCards);
-                    }
-
-                );
+    async getAllLiftsFin() {
+        let keys = await getAllLifts();
+        let liftCards = [];
+        for (let key of keys) {
+            let holder = await loadLift(key);
+            const item = holder[key];
+            if (item != undefined) {
+                item['type'] = 'liftCard';
+                liftCards.push(this.factory.create({item}));
 
             }
-
-        });
+        }
+        return liftCards;
     }
 
-    render() {
-        return (
-            <ScrollView>
-                {this.state.liftCards}
-            </ScrollView>
 
-        );
 
-    }
+componentDidMount()
+{
+    this.getAllLiftsFin().then(r => {
+        this.setState({liftCards: r});
+    });
 }
 
+render()
+{
+    return (
+        <ScrollView>
+            {this.state.liftCards}
+        </ScrollView>
+
+    );
+
+}
+}
 export default LiftListScreen;
