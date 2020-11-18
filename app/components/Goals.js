@@ -12,6 +12,11 @@ class Goals extends Component {
 
     }
 
+    update(pr) {
+        if (pr >= goalWeight) {
+            alert('Goal Achieved!');
+        }
+    }
 
 
     render() {

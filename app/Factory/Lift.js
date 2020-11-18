@@ -3,6 +3,7 @@ import {Keyboard, TextInput, View, TouchableOpacity, StyleSheet, Text} from "rea
 import {Input} from 'react-native-elements';
 import {saveLift, removeItemValue, getAllLifts} from "../Storage/saveLifts";
 import SelectMultiple from 'react-native-select-multiple'
+//import Goals from "../components"
 
 class Lift extends Component {
     liftName;
@@ -17,12 +18,14 @@ class Lift extends Component {
     constructor(props, {type}) {
         super(props);
         this.type = type;
-        this.state = {name: '', description: '', pr: '', muscleGroup: []};
+        this.state = {name: '', description: '', pr: '', muscleGroup: [], goal: ''};
         this.handleNameChange = this.handleNameChange.bind(this);
         this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
         this.handleMuscleGroupChange = this.handleMuscleGroupChange.bind(this);
         this.handlePRChange = this.handlePRChange.bind(this);
+        this.handleGoalChange = this.handleGoalChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.observers = [];
         // getAllLifts().then(r => {
         //     console.log(r);
         //     for (let key of r) {
@@ -59,12 +62,32 @@ class Lift extends Component {
         this.setState({muscleGroup : simplifiedGroups});
     }
 
+    addObserver(observer) {
+        this.observers.push(observer);
+    }
+
+    notify(data) {
+        if (this.observers.length > 0){
+            this.observers.forEach(observer => observer.update(data));
+        }
+    }
+
     handlePRChange(pr) {
         this.setState({pr});
+        //this.notify(this.pr);
+    }
+
+    handleGoalChange(goal) {
+        this.setState({goal});
+        //liftGoal = new Goals();
+        //this.addObserver(liftGoal);
     }
 
     handleSubmit() {
         if (this.state.name.length > 0) {
+            if (Number(this.state.goal) <= Number(this.state.pr)) {
+                alert('Goal Achieved!')
+            }
             const name = this.state.name;
             const liftCard = {};
             liftCard[name] = this.state;
@@ -105,6 +128,11 @@ class Lift extends Component {
                     value={this.state.pr}
                     onChangeText={this.handlePRChange}
                 />
+                <Input
+                    placeholder='Goal Weight'
+                    value={this.state.goal}
+                    onChangeText={this.handleGoalChange}
+                 />
                 <View style={styles.inputContainer}>
                     <TouchableOpacity
                         style={styles.saveButton}
