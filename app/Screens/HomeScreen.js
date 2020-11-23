@@ -43,6 +43,20 @@ class HomeScreen extends React.Component {
                 <View>
                     <TouchableOpacity
                         style={styles.Button}
+                        onPress={() => this.props.navigation.navigate('Create Workout', {
+                            items: [
+                                {
+                                    "type": "lift"
+                                }
+                            ]
+                        })}
+                        >
+                        <Text style={styles.ButtonText}>{'Create Workout'}</Text>
+                    </TouchableOpacity>
+                </View>
+                <View>
+                    <TouchableOpacity
+                        style={styles.Button}
                         onPress={() => console.log("touch")}
                     >
                         <Text style={styles.ButtonText}>{'My Workouts'}</Text>
