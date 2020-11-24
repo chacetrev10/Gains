@@ -124,7 +124,6 @@ class Lift extends Component {
                     value={this.state.description}
                     onChangeText={this.handleDescriptionChange}
                 />
-                <Text>Main muscle group</Text>
                 {/*<SelectMultiple*/}
                 {/*    items={this.items}*/}
                 {/*    selectedItems={this.selectedItems}*/}
@@ -132,7 +131,7 @@ class Lift extends Component {
                 <RNPickerSelect
                     items={this.items}
                     placeholder={{label:'Select main muscle group', value: ''}}
-                    style={styles.inputIOS}
+                    style={pickerStyle}
                     onValueChange={this.handleMuscleGroupChange}/>
                 <Input
                     placeholder='Current PR'
@@ -158,7 +157,7 @@ class Lift extends Component {
     }
 }
 
-const styles = StyleSheet.flatten({
+const styles = StyleSheet.create({
     saveButton: {
         borderWidth: 1,
         borderColor: 'black',
@@ -170,14 +169,35 @@ const styles = StyleSheet.flatten({
         color: '#FFFFFF',
         fontSize: 20,
         textAlign: 'center'
-    },
+    }
+});
+const pickerStyle = {
     inputIOS: {
-        color: 'white',
+        color: 'black',
         paddingTop: 13,
         paddingHorizontal: 10,
         paddingBottom: 12,
-    }
-});
+    },
+    inputAndroid: {
+        color: 'black',
+    },
+    placeholderColor: 'black',
+    underline: { borderTopWidth: 0 },
+    icon: {
+        position: 'absolute',
+        backgroundColor: 'transparent',
+        borderTopWidth: 5,
+        borderTopColor: '#00000099',
+        borderRightWidth: 5,
+        borderRightColor: 'transparent',
+        borderLeftWidth: 5,
+        borderLeftColor: 'transparent',
+        width: 0,
+        height: 0,
+        top: 20,
+        right: 15,
+    },
+};
 
 
 export default Lift;
