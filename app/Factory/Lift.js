@@ -4,6 +4,7 @@ import {Input} from 'react-native-elements';
 import {saveLift, removeItemValue, getAllLifts} from "../Storage/saveLifts";
 import SelectMultiple from 'react-native-select-multiple'
 //import Goals from "../components"
+import RNPickerSelect from 'react-native-picker-select';
 
 class Lift extends Component {
     liftName;
@@ -12,13 +13,18 @@ class Lift extends Component {
     goalWeight;
     currentWeightPr;
     lifts;
-    items = ['Chest','Shoulders','Legs','Back','Arms'];
+    items = [{label: 'Chest', value: 'Chest'},
+        {label: 'Back', value: 'Back'},
+        {label: 'Arms', value: 'Arms'},
+        {label: 'Shoulders', value: 'Shoulders'},
+        {label: 'Legs', value: 'Legs'}];
+
     selectedItems;
 
     constructor(props, {type}) {
         super(props);
         this.type = type;
-        this.state = {name: '', description: '', pr: '', muscleGroup: [], goal: ''};
+        this.state = {name: '', description: '', pr: '', muscleGroup: '', goal: ''};
         this.handleNameChange = this.handleNameChange.bind(this);
         this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
         this.handleMuscleGroupChange = this.handleMuscleGroupChange.bind(this);
@@ -54,12 +60,7 @@ class Lift extends Component {
     }
 
     handleMuscleGroupChange(muscleGroup) {
-        this.selectedItems = muscleGroup;
-        let simplifiedGroups=[];
-        for(let group of muscleGroup){
-            simplifiedGroups.push(group['value']);
-        }
-        this.setState({muscleGroup : simplifiedGroups});
+        this.setState({muscleGroup: muscleGroup.value});
     }
 
     addObserver(observer) {
@@ -67,7 +68,7 @@ class Lift extends Component {
     }
 
     notify(data) {
-        if (this.observers.length > 0){
+        if (this.observers.length > 0) {
             this.observers.forEach(observer => observer.update(data));
         }
     }
@@ -118,11 +119,15 @@ class Lift extends Component {
                     value={this.state.description}
                     onChangeText={this.handleDescriptionChange}
                 />
-                <Text>Correlating muscle group(s)</Text>
-                <SelectMultiple
+                <Text>Main muscle group</Text>
+                {/*<SelectMultiple*/}
+                {/*    items={this.items}*/}
+                {/*    selectedItems={this.selectedItems}*/}
+                {/*    onSelectionsChange={this.handleMuscleGroupChange}/>*/}
+                <RNPickerSelect
                     items={this.items}
-                    selectedItems={this.selectedItems}
-                    onSelectionsChange={this.handleMuscleGroupChange}/>
+                    value={this.state.muscleGroup != null ?  this.state.muscleGroup : 'hello'}
+                    onValueChange={this.handleMuscleGroupChange}/>
                 <Input
                     placeholder='Current PR'
                     value={this.state.pr}
@@ -132,7 +137,7 @@ class Lift extends Component {
                     placeholder='Goal Weight'
                     value={this.state.goal}
                     onChangeText={this.handleGoalChange}
-                 />
+                />
                 <View style={styles.inputContainer}>
                     <TouchableOpacity
                         style={styles.saveButton}

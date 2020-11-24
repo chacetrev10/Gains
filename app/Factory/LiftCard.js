@@ -4,9 +4,13 @@ import {Card} from 'react-native-elements'
 
 
 class LiftCard extends React.Component {
+    goTo;
+
     constructor(props, {type}) {
         super(props);
         this.type = type;
+        this.goTo = this.props.item.goTo;
+        console.log(props);
     }
 
     showDescription() {
@@ -42,7 +46,7 @@ class LiftCard extends React.Component {
         return (
             <View>
                 <TouchableOpacity
-                    onPress={() => this.props.props.navigation.navigate('Edit Lift',{
+                    onPress={() => this.props.props.navigation.navigate(this.goTo,{
                         items: this.props.item
                     })}>
                     <Card>

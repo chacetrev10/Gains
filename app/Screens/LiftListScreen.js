@@ -21,13 +21,20 @@ class LiftListScreen extends React.Component {
             legLiftCards: [],
             shoulderLiftCards: [],
             backLiftCards: [],
-            armLiftCards: []
+            armLiftCards: [],
+            workoutLifts: []
         };
+
     }
 
 
     async getAllLiftsFin() {
-        let keys = await getAllLifts();
+        let keys;
+        if (this.props.route.params.items.lifts) {
+            keys = this.props.route.params.items.lifts;
+        }else {
+            keys = await getAllLifts();
+        }
         let liftCards = {
             ChestLiftCards: [],
             LegsLiftCards: [],
@@ -41,9 +48,10 @@ class LiftListScreen extends React.Component {
             const item = holder[key];
             if (item != undefined) {
                 item['type'] = 'liftCard';
+                item['goTo'] = 'Edit Lift';
                 let component = this.factory.create({item});
                 for (let group of item['muscleGroup']) {
-                    liftCards[group+'LiftCards'].push(component);
+                    liftCards[group + 'LiftCards'].push(component);
                 }
 
             }
@@ -51,7 +59,7 @@ class LiftListScreen extends React.Component {
         return liftCards;
     }
 
-    showChest(){
+    showChest() {
         if (this.state.chestLiftCards.length > 0) {
             return <div>
                 <HeaderTitle>Chest</HeaderTitle>
@@ -59,10 +67,10 @@ class LiftListScreen extends React.Component {
             </div>;
 
         }
-        return ;
+        return;
     }
 
-    showLegs(){
+    showLegs() {
         if (this.state.legLiftCards.length > 0) {
             return <div>
                 <HeaderTitle>Legs</HeaderTitle>
@@ -70,9 +78,10 @@ class LiftListScreen extends React.Component {
             </div>;
 
         }
-        return ;
+        return;
     }
-    showBack(){
+
+    showBack() {
         if (this.state.backLiftCards.length > 0) {
             return <div>
                 <HeaderTitle>Back</HeaderTitle>
@@ -80,9 +89,10 @@ class LiftListScreen extends React.Component {
             </div>;
 
         }
-        return ;
+        return;
     }
-    showArms(){
+
+    showArms() {
         if (this.state.armLiftCards.length > 0) {
             return <div>
                 <HeaderTitle>Arms</HeaderTitle>
@@ -90,9 +100,10 @@ class LiftListScreen extends React.Component {
             </div>;
 
         }
-        return ;
+        return;
     }
-    showShoulders(){
+
+    showShoulders() {
         if (this.state.shoulderLiftCards.length > 0) {
             return <div>
                 <HeaderTitle>Shoulders</HeaderTitle>
@@ -100,10 +111,11 @@ class LiftListScreen extends React.Component {
             </div>;
 
         }
-        return ;
+        return;
     }
 
     componentDidMount() {
+
         this.getAllLiftsFin().then(r => {
             this.setState({chestLiftCards: r.ChestLiftCards});
             this.setState({legLiftCards: r.LegsLiftCards});
