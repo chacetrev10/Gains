@@ -8,17 +8,11 @@ export const saveLift = async (lift) => {
     }
 };
 
-const defaultLift = {
-    name: '',
-    description: '' ,
-    pr: ''
-};
 
 export const loadLift = async (key) => {
     try {
         let lifts = await AsyncStorage.getItem(key);
-        if (lifts === null) { return defaultLift; }
-
+        if (lifts === null) { return null; }
         return JSON.parse(lifts);
     } catch (error) {
         console.log('Error loading settings', error);
@@ -45,9 +39,7 @@ export const removeItemValue= async(key)=> {
 };
 
 export const saveWorkout = async (workout) => {
-    console.log(workout);
     let key = Object.keys(workout)[0]
-    console.log(key);
     if(key != undefined) {
         let currentWorkouts = await AsyncStorage.getItem("Workouts");
         if(currentWorkouts == null){

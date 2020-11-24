@@ -4,7 +4,8 @@ import {Input} from 'react-native-elements';
 import {saveLift, removeItemValue, getAllLifts} from "../Storage/saveLifts";
 import SelectMultiple from 'react-native-select-multiple'
 //import Goals from "../components"
-import RNPickerSelect from 'react-native-picker-select';
+import RNPickerSelect,{ defaultStyles } from 'react-native-picker-select';
+
 
 class Lift extends Component {
     liftName;
@@ -13,7 +14,8 @@ class Lift extends Component {
     goalWeight;
     currentWeightPr;
     lifts;
-    items = [{label: 'Chest', value: 'Chest'},
+    items = [
+        {label: 'Chest', value: 'Chest'},
         {label: 'Back', value: 'Back'},
         {label: 'Arms', value: 'Arms'},
         {label: 'Shoulders', value: 'Shoulders'},
@@ -41,6 +43,7 @@ class Lift extends Component {
         //     }
         // });
 
+
     }
 
     setData(data) {
@@ -60,7 +63,9 @@ class Lift extends Component {
     }
 
     handleMuscleGroupChange(muscleGroup) {
-        this.setState({muscleGroup: muscleGroup.value});
+        console.log(muscleGroup);
+        this.setState({muscleGroup});
+        console.log(this.state.muscleGroup);
     }
 
     addObserver(observer) {
@@ -126,7 +131,8 @@ class Lift extends Component {
                 {/*    onSelectionsChange={this.handleMuscleGroupChange}/>*/}
                 <RNPickerSelect
                     items={this.items}
-                    value={this.state.muscleGroup != null ?  this.state.muscleGroup : 'hello'}
+                    placeholder={{label:'Select main muscle group', value: ''}}
+                    style={styles.inputIOS}
                     onValueChange={this.handleMuscleGroupChange}/>
                 <Input
                     placeholder='Current PR'
@@ -152,7 +158,7 @@ class Lift extends Component {
     }
 }
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.flatten({
     saveButton: {
         borderWidth: 1,
         borderColor: 'black',
@@ -164,6 +170,12 @@ const styles = StyleSheet.create({
         color: '#FFFFFF',
         fontSize: 20,
         textAlign: 'center'
+    },
+    inputIOS: {
+        color: 'white',
+        paddingTop: 13,
+        paddingHorizontal: 10,
+        paddingBottom: 12,
     }
 });
 

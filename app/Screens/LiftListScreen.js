@@ -30,8 +30,9 @@ class LiftListScreen extends React.Component {
 
     async getAllLiftsFin() {
         let keys;
-        if (this.props.route.params.items.lifts) {
+        if (this.props.route.params.items.lifts != undefined) {
             keys = this.props.route.params.items.lifts;
+            console.log(this.props.route.params)
         }else {
             keys = await getAllLifts();
         }
@@ -50,9 +51,9 @@ class LiftListScreen extends React.Component {
                 item['type'] = 'liftCard';
                 item['goTo'] = 'Edit Lift';
                 let component = this.factory.create({item});
-                for (let group of item['muscleGroup']) {
-                    liftCards[group + 'LiftCards'].push(component);
-                }
+                console.log(item);
+                liftCards[item['muscleGroup'] + 'LiftCards'].push(component);
+
 
             }
         }
@@ -61,10 +62,10 @@ class LiftListScreen extends React.Component {
 
     showChest() {
         if (this.state.chestLiftCards.length > 0) {
-            return <div>
-                <HeaderTitle>Chest</HeaderTitle>
+            return <View>
+                <HeaderTitle>{this.props.route.params.items.name == undefined ? 'Chest' : ''}</HeaderTitle>
                 {this.state.chestLiftCards}
-            </div>;
+            </View>;
 
         }
         return;
@@ -72,10 +73,10 @@ class LiftListScreen extends React.Component {
 
     showLegs() {
         if (this.state.legLiftCards.length > 0) {
-            return <div>
-                <HeaderTitle>Legs</HeaderTitle>
+            return <View>
+                <HeaderTitle>{this.props.route.params.items.name == undefined ? 'Legs' : ''}</HeaderTitle>
                 {this.state.legLiftCards}
-            </div>;
+            </View>;
 
         }
         return;
@@ -83,10 +84,10 @@ class LiftListScreen extends React.Component {
 
     showBack() {
         if (this.state.backLiftCards.length > 0) {
-            return <div>
-                <HeaderTitle>Back</HeaderTitle>
+            return <View>
+                <HeaderTitle>{this.props.route.params.items.name == undefined ? 'Back' : ''}</HeaderTitle>
                 {this.state.backLiftCards}
-            </div>;
+            </View>;
 
         }
         return;
@@ -94,10 +95,10 @@ class LiftListScreen extends React.Component {
 
     showArms() {
         if (this.state.armLiftCards.length > 0) {
-            return <div>
-                <HeaderTitle>Arms</HeaderTitle>
+            return <View>
+                <HeaderTitle>{this.props.route.params.items.name == undefined ? 'Arms' : ''}</HeaderTitle>
                 {this.state.armLiftCards}
-            </div>;
+            </View>;
 
         }
         return;
@@ -105,14 +106,16 @@ class LiftListScreen extends React.Component {
 
     showShoulders() {
         if (this.state.shoulderLiftCards.length > 0) {
-            return <div>
-                <HeaderTitle>Shoulders</HeaderTitle>
+            return <View>
+                <HeaderTitle>{this.props.route.params.items.name == undefined ? 'Shoulders' : ''}</HeaderTitle>
                 {this.state.shoulderLiftCards}
-            </div>;
+            </View>;
 
         }
         return;
     }
+
+
 
     componentDidMount() {
 
@@ -128,6 +131,8 @@ class LiftListScreen extends React.Component {
     render() {
         return (
             <ScrollView>
+                <HeaderTitle>{this.props.route.params.items.name == undefined ? '' :
+                    this.props.route.params.items.name }</HeaderTitle>
                 {this.showChest()}
                 {this.showArms()}
                 {this.showShoulders()}
