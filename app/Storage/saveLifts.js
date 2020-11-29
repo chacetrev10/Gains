@@ -8,6 +8,20 @@ export const saveLift = async (lift) => {
     }
 };
 
+export const saveLiftData = async (data) => {
+    let name = data.name;
+    let date = data.date;
+    console.log(data);
+    delete data['name'];
+    delete data['date'];
+    let lift = await AsyncStorage.getItem(name);
+    lift = JSON.parse(lift);
+    let liftPerfs = lift[name]['data'];
+    liftPerfs[date] = data.stats;
+    AsyncStorage.setItem(name, JSON.stringify(lift));
+
+};
+
 
 export const loadLift = async (key) => {
     try {

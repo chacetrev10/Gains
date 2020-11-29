@@ -51,7 +51,6 @@ class LiftListScreen extends React.Component {
                 item['type'] = 'liftCard';
                 item['goTo'] = 'Edit Lift';
                 let component = this.factory.create({item});
-                console.log(item);
                 liftCards[item['muscleGroup'] + 'LiftCards'].push(component);
 
 

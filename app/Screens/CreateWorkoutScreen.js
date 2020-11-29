@@ -30,7 +30,7 @@ class CreateWorkoutScreen extends Component {
     }
 
     handleNameChange(name) {
-        this.setState({name});
+        this.setState({name: name.toUpperCase()});
     }
 
     handleLiftsChange(lifts) {

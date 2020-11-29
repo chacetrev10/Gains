@@ -26,7 +26,7 @@ class Lift extends Component {
     constructor(props, {type}) {
         super(props);
         this.type = type;
-        this.state = {name: '', description: '', pr: '', muscleGroup: '', goal: ''};
+        this.state = {name: '', description: '', pr: '', muscleGroup: '', goal: '',data:{}};
         this.handleNameChange = this.handleNameChange.bind(this);
         this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
         this.handleMuscleGroupChange = this.handleMuscleGroupChange.bind(this);
@@ -55,7 +55,7 @@ class Lift extends Component {
     }
 
     handleNameChange(name) {
-        this.setState({name});
+        this.setState({name: name.toUpperCase()});
     }
 
     handleDescriptionChange(description) {
@@ -102,24 +102,16 @@ class Lift extends Component {
     }
 
 
-    getTime() {
-        let dateObj = new Date();
-        let month = dateObj.getUTCMonth() + 1; //months from 1-12
-        let day = dateObj.getUTCDate();
-        let year = dateObj.getUTCFullYear();
-        return year.toString() + month.toString() + day.toString()
-    }
-
     render() {
         return (
             <View>
-                <Input
+                <Input style={styles.inputContainer}
                     placeholder='Lift Name'
                     value={this.state.name}
                     onChangeText={this.handleNameChange}
                 />
                 {this.props.children}
-                <Input
+                <Input style={styles.inputContainer}
                     placeholder='Description'
                     value={this.state.description}
                     onChangeText={this.handleDescriptionChange}
@@ -128,17 +120,17 @@ class Lift extends Component {
                 {/*    items={this.items}*/}
                 {/*    selectedItems={this.selectedItems}*/}
                 {/*    onSelectionsChange={this.handleMuscleGroupChange}/>*/}
-                <RNPickerSelect
+                <RNPickerSelect style={styles.inputContainer}
                     items={this.items}
                     placeholder={{label:'Select main muscle group', value: ''}}
                     style={pickerStyle}
                     onValueChange={this.handleMuscleGroupChange}/>
-                <Input
+                <Input style={styles.inputContainer}
                     placeholder='Current PR'
                     value={this.state.pr}
                     onChangeText={this.handlePRChange}
                 />
-                <Input
+                <Input style={styles.inputContainer}
                     placeholder='Goal Weight'
                     value={this.state.goal}
                     onChangeText={this.handleGoalChange}
@@ -169,6 +161,10 @@ const styles = StyleSheet.create({
         color: '#FFFFFF',
         fontSize: 20,
         textAlign: 'center'
+    },
+    inputContainer: {
+        marginTop: 40,
+        paddingLeft: 15
     }
 });
 const pickerStyle = {

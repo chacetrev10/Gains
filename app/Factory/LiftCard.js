@@ -9,9 +9,7 @@ class LiftCard extends React.Component {
     constructor(props, {type}) {
         super(props);
         this.type = type;
-        this.goTo = this.props.item.goTo;
-        console.log(props);
-    }
+        this.goTo = this.props.item.goTo;}
 
     showDescription() {
         if (this.props.item.description.length > 0) {
