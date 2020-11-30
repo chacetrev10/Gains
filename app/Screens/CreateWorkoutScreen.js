@@ -81,15 +81,17 @@ render()
 const styles = StyleSheet.create({
     saveButton: {
         borderWidth: 1,
-        borderColor: 'black',
-        backgroundColor: 'black',
+        borderColor: '#0B2161',
+        backgroundColor: '#0B2161',
+        borderRadius: 25,
         padding: 15,
         margin: 5
     },
     saveButtonText: {
         color: '#FFFFFF',
         fontSize: 20,
-        textAlign: 'center'
+        textAlign: 'center',
+        fontWeight: '600'
     },
     liftSelect: {
         height: '65%'

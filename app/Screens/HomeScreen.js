@@ -110,20 +110,26 @@ const styles = StyleSheet.create({
         marginBottom: 50,
     },
     headerText: {
-        color: 'black',
+        color: '#0B2161',
         fontSize: 75,
         fontWeight: '500',
-        textAlign: 'center'
+        textAlign: 'center',
+        fontFamily: 'arial black',
     },
     Button: {
         borderWidth: 1,
-        borderColor: 'black',
-        backgroundColor: 'black',
+        //borderColor: 'black',
+        //backgroundColor: 'black',
+        borderColor: '#2E2E2E',
+        backgroundColor: '#0B2161',
         padding: 15,
-        margin: 5
+        margin: 5,
+        borderRadius: 25
     },
     ButtonText: {
         color: '#FFFFFF',
+        //color: '#610B21',
+        fontWeight: '600',
         fontSize: 20,
         textAlign: 'center'
     }

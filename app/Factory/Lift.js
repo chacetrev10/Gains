@@ -152,19 +152,21 @@ class Lift extends Component {
 const styles = StyleSheet.create({
     saveButton: {
         borderWidth: 1,
-        borderColor: 'black',
-        backgroundColor: 'black',
+        borderColor: '#0B2161',
+        borderRadius: 25,
+        backgroundColor: '#0B2161',
         padding: 15,
         margin: 5
     },
     saveButtonText: {
         color: '#FFFFFF',
         fontSize: 20,
-        textAlign: 'center'
+        textAlign: 'center',
+        fontWeight: '600'
     },
     inputContainer: {
         marginTop: 40,
-        paddingLeft: 15
+        paddingLeft: 15,
     }
 });
 const pickerStyle = {
@@ -172,10 +174,10 @@ const pickerStyle = {
         color: 'black',
         paddingTop: 13,
         paddingHorizontal: 10,
-        paddingBottom: 12,
+        paddingBottom: 12
     },
     inputAndroid: {
-        color: 'black',
+        color: 'black'
     },
     placeholderColor: 'black',
     underline: { borderTopWidth: 0 },
