@@ -1,10 +1,10 @@
 import React from "react";
-import {ScrollView, StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import {ScrollView, StyleSheet, Text, TouchableOpacity, View, FlatList, SafeAreaView} from "react-native";
 import {Card} from 'react-native-elements'
 import {HeaderTitle} from "@react-navigation/stack";
 import {Input} from 'react-native-elements';
 import {saveLiftData} from "../Storage/saveLifts";
-import FlatList from "react-native-web/dist/vendor/react-native/FlatList";
+
 
 
 class EditLiftScreen extends React.Component {
@@ -67,7 +67,7 @@ class EditLiftScreen extends React.Component {
         let month = dateObj.getUTCMonth() + 1; //months from 1-12
         let day = dateObj.getUTCDate();
         let year = dateObj.getUTCFullYear();
-        return year.toString() + '-' + month.toString() + '-' + day.toString();
+        return year.toString() + '-' + month.toString() + '-' + day.toString()
     }
 
     render() {
@@ -77,30 +77,33 @@ class EditLiftScreen extends React.Component {
                 <HeaderTitle>Description: {this.lift.description}</HeaderTitle>
                 <HeaderTitle>PR: {this.lift.pr}</HeaderTitle>
                 <HeaderTitle>Past Performances: </HeaderTitle>
-                <ScrollView>
+                <SafeAreaView>
                     <FlatList
                         data={this.data}
                         renderItem={renderItem}
                         contentContainerStyle={styles.cardContainer}
                     />
-                </ScrollView>
+                </SafeAreaView>
                 <HeaderTitle>Input New Performance:</HeaderTitle>
                 <View style={styles.row}>
                     <View style={styles.inputWrap}>
-                        <Input required label="Sets" type="number"
+                        <Input required type="number"
                                value={this.state.set}
+                               placeholder="Sets"
                                onChangeText={this.handleSetChange}/>
 
                     </View>
                     <View style={styles.inputWrap}>
-                        <Input required label="Reps" type="number"
+                        <Input required  type="number"
                                value={this.state.reps}
+                               placeholder="Reps"
                                onChangeText={this.handleRepChange}/>
 
                     </View>
                     <View style={styles.inputWrap}>
-                        <Input required label="Weight" type="number"
+                        <Input required type="number"
                                value={this.state.weight}
+                               placeholder="Weight"
                                onChangeText={this.handleWeightChange}/>
 
                     </View>
@@ -130,14 +133,13 @@ const renderItem = ({item}) => (
 
 const styles = StyleSheet.create({
     row: {
-        flex: 1,
-        flexDirection: "row"
+        flexDirection: "row",
+        marginTop: 30
+
     },
     inputWrap: {
         flex: 3,
         borderColor: "#cccccc",
-        borderBottomWidth: 1,
-        marginBottom: 10,
         flexDirection: "row"
     },
     saveButton: {
