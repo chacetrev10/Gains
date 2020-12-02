@@ -1,12 +1,13 @@
 # Gains
-####Chace Trevino and Joe Wilson
+Authors: Chace Trevino and Joe Wilson
+
 In order to run: 
 
 Make sure npm is installed (https://www.npmjs.com/get-npm)
 
-npm install
-
 cd to your project directory
+
+npm install
 
 expo start
 
