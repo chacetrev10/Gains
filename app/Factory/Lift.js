@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {Keyboard, TextInput, View, TouchableOpacity, StyleSheet, Text} from "react-native";
 import {Input} from 'react-native-elements';
-import {saveLift, removeItemValue, getAllLifts} from "../Storage/saveLifts"
+import {saveLift, removeItemValue, getAllLifts} from "../Storage/saveLifts";
+import SelectMultiple from 'react-native-select-multiple'
 //import Goals from "../components"
 import RNPickerSelect,{ defaultStyles } from 'react-native-picker-select';
 

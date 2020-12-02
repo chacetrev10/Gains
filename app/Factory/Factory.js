@@ -10,6 +10,7 @@ class Factory{
     create({ item }) {
         const { type } = item;
         const factory = this.factoryMapper.factory(type);
+        //polymorphic behavior as it calls the create method on whichever factory type
         return factory.create({ item });
     }
 }
