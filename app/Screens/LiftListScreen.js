@@ -27,7 +27,7 @@ class LiftListScreen extends React.Component {
 
     }
 
-
+    //Get all lift objects, create cards to diplay their data and store in muscle group array
     async getAllLiftsFin() {
         let keys;
         if (this.props.route.params.items.lifts != undefined) {

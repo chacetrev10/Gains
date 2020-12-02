@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text, StyleSheet, Image, Button, Alert, TouchableOpacity} from 'react-native';
 import {Touchable} from "react-native-web";
 
-
+//Screen seen on loading of app
 class HomeScreen extends React.Component {
     constructor(props) {
         super(props);
@@ -25,7 +25,6 @@ class HomeScreen extends React.Component {
 
             <View >
                 <Text style={styles.headerText}>{'GAINS'}</Text>
-                {/*<Image style={{width: '100%', height: '30%'}} source={require('../utils/weight.png')}/>*/}
                 <View>
                     <TouchableOpacity
                         style={styles.Button}

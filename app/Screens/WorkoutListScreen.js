@@ -16,7 +16,7 @@ class WorkoutListScreen extends React.Component {
             workouts: []
         };
         this.factory = new Factory(props);
-        this.getAllLiftsFin().then(r => {
+        this.getAllWorkouts().then(r => {
             if(r != null)
             this.setState({workouts: r});
         })
@@ -34,7 +34,8 @@ class WorkoutListScreen extends React.Component {
         }
     }
 
-    async getAllLiftsFin() {
+    //loads in all of the workout objects and creates cards for them to display data
+    async getAllWorkouts() {
         let workouts = await loadLift("Workouts");
         if(workouts != null) {
             for (let wo of Object.keys(workouts)) {
@@ -48,6 +49,8 @@ class WorkoutListScreen extends React.Component {
                 workouts[wo]['lifts'] = lifts;
                 console.log(workouts[wo]);
                 let item = workouts[wo];
+
+                //using factory class to create given item
                 let component = this.factory.create({item});
                 this.workoutCards.push(component);
             }

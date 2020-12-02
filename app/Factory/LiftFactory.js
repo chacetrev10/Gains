@@ -1,6 +1,7 @@
 import React from "react";
 import Lift from "./Lift";
 
+//Factory to create lift objects
 class LiftFactory {
     get type() { return 'lift'; }
 

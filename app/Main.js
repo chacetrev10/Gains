@@ -2,7 +2,6 @@
 import React from 'react';
 import { StyleSheet} from 'react-native';
 import HomeScreen from './Screens/HomeScreen';
-import Input from './components/Input';
 let headerTitle = 'GAINS';
 export default class Main extends React.Component {
     state = {

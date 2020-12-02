@@ -1,6 +1,10 @@
 import AsyncStorage from '@react-native-community/async-storage';
 
+//Persistent storage class
+//https://whatdidilearn.info/2018/11/25/local-data-persistence-in-react-native-using-asyncstorage.html
+//Acts as a mediator pattern as all communications between objects are to or from this class
 
+//stores a new individual lift
 export const saveLift = async (lift) => {
     let key = lift[Object.keys(lift)[0]].name;
     if(key != undefined) {
@@ -8,6 +12,7 @@ export const saveLift = async (lift) => {
     }
 };
 
+//stores new data in existing object
 export const saveLiftData = async (data) => {
     let name = data.name;
     let date = data.date;
@@ -22,7 +27,7 @@ export const saveLiftData = async (data) => {
 
 };
 
-
+//loads items given a key
 export const loadLift = async (key) => {
     try {
         let lifts = await AsyncStorage.getItem(key);
@@ -33,6 +38,7 @@ export const loadLift = async (key) => {
     }
 };
 
+//gets all stored keys
 export const getAllLifts = async () => {
     try {
         const keys = await AsyncStorage.getAllKeys();
@@ -42,6 +48,7 @@ export const getAllLifts = async () => {
     }
 };
 
+//removes any item from db
 export const removeItemValue= async(key)=> {
     try {
         await AsyncStorage.removeItem(key);
@@ -52,6 +59,7 @@ export const removeItemValue= async(key)=> {
     }
 };
 
+//stores workout objects
 export const saveWorkout = async (workout) => {
     let key = Object.keys(workout)[0]
     if(key != undefined) {
