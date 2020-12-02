@@ -3,7 +3,7 @@ import {ScrollView, StyleSheet, Text, TouchableOpacity, View, FlatList, SafeArea
 import {Card} from 'react-native-elements'
 import {HeaderTitle} from "@react-navigation/stack";
 import {Input} from 'react-native-elements';
-import {saveLiftData} from "../Storage/saveLifts";
+import {saveLiftData, saveNewPR} from "../Storage/saveLifts";
 
 
 
@@ -30,7 +30,7 @@ class EditLiftScreen extends React.Component {
 
     handlePRChange(newPR) {
         // lift.pr = newPR;
-        this.setState({pr: newPR});
+        this.setState({pr});
     }
 
     handleSetChange(set) {
@@ -60,6 +60,18 @@ class EditLiftScreen extends React.Component {
             saveLiftData(newPerf);
         }
 
+        if (this.state.weight > this.state.pr) {
+            let newPR = {
+                prData: this.state.weight,
+                name: this.lift.name
+            }
+            saveNewPR(newPR);
+        }
+
+        if (this.state.weight >= this.lift.goal) {
+            alert("Goal Achieved!");
+        }
+
     }
 
     getTime() {
@@ -76,6 +88,7 @@ class EditLiftScreen extends React.Component {
                 <HeaderTitle>{this.lift.name}</HeaderTitle>
                 <HeaderTitle>Description: {this.lift.description}</HeaderTitle>
                 <HeaderTitle>PR: {this.lift.pr}</HeaderTitle>
+                <HeaderTitle>Goal: {this.lift.goal}</HeaderTitle>
                 <HeaderTitle>Past Performances: </HeaderTitle>
                 <SafeAreaView>
                     <FlatList
@@ -108,12 +121,6 @@ class EditLiftScreen extends React.Component {
 
                     </View>
                 </View>
-                <HeaderTitle>Goal: {this.lift.goal}</HeaderTitle>
-                <Input
-                    placeholder='Enter New PR'
-                    //value={this.lift.pr}
-                    onChangeText={this.handlePRChange}
-                />
                 <View style={styles.inputContainer}>
                     <TouchableOpacity
                         style={styles.saveButton}

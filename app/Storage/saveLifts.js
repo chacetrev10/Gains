@@ -27,6 +27,20 @@ export const saveLiftData = async (data) => {
 
 };
 
+//save a new PR after inputting new performance
+export const saveNewPR = async (newPR) => {
+    let name = newPR.name;
+    delete newPR['name'];
+    let lift = await AsyncStorage.getItem(name);
+    lift = JSON.parse(lift);
+    lift[name]['pr'] = newPR.prData;
+    AsyncStorage.setItem(name, JSON.stringify(lift));
+
+    let lift2 = await AsyncStorage.getItem(name);
+    lift2 = JSON.parse(lift2);
+    AsyncStorage.setItem(name, JSON.stringify(lift2));
+};
+
 //loads items given a key
 export const loadLift = async (key) => {
     try {
