@@ -1,13 +1,13 @@
 # Gains
-
+####Chace Trevino and Joe Wilson
 In order to run: 
 
-Install latest version of npm
+Make sure npm is installed (https://www.npmjs.com/get-npm)
 
-npm install --global expo-cli
+npm install
 
 cd to your project directory
 
 expo start
 
-download expo on your device and scan qr code
+download expo on your device and scan qr code or run from web browser popup
