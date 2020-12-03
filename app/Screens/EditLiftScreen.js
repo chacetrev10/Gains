@@ -4,9 +4,12 @@ import {Card} from 'react-native-elements'
 import {HeaderTitle} from "@react-navigation/stack";
 import {Input} from 'react-native-elements';
 import {saveLiftData, saveNewPR, saveNewGoal} from "../Storage/saveLifts";
+import {alertObserver} from "./EditGoalScreen";
 
 
-
+//Screen to allow user to input new lift data
+//Also contains the goal for a lift that is being observed by the
+//lift goal observer
 class EditLiftScreen extends React.Component {
     lift;
     data = [];
@@ -22,34 +25,27 @@ class EditLiftScreen extends React.Component {
 
         this.state = {set: '', reps: '', weight: '', pr: this.lift.pr};
         this.handleSetChange = this.handleSetChange.bind(this);
-        this.handlePRChange = this.handlePRChange.bind(this);
         this.handleRepChange = this.handleRepChange.bind(this);
         this.handleWeightChange = this.handleWeightChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handlePRChange(newPR) {
-        // lift.pr = newPR;
-        // this.setState({pr: newPR});
-    }
-
+    //handle the input of new set, rep, and weight data
     handleSetChange(set) {
         this.setState({set})
     }
 
     handleRepChange(reps) {
         this.setState({reps})
-        // console.log(this.getTime());
     }
 
     handleWeightChange(weight) {
         this.setState({weight})
     }
 
+    //save new weight data when user clicks the 'save' button
     handleSubmit() {
-        // if (Number(this.lift.goal) <= Number(this.state.pr)) {
-        //     alert('Goal Achieved!');
-        // }
+        //save new performance metrics
         if (this.state.set != '' && this.state.reps != '' && this.state.weight != '') {
             let newPerf = {
                 stats: this.state.set + 'x' + this.state.reps + 'x' + this.state.weight + " lbs",
@@ -58,6 +54,7 @@ class EditLiftScreen extends React.Component {
 
             }
 
+            //if user reaches new PR, update lift data
             if(Number(this.state.weight) > Number(this.state.pr)){
                 newPerf['prData'] = this.state.weight;
             }
@@ -65,21 +62,9 @@ class EditLiftScreen extends React.Component {
             saveLiftData(newPerf);
         }
 
-        // if (this.state.weight > this.state.pr) {
-        //     let newPR = {
-        //         prData: this.state.weight,
-        //         name: this.lift.name
-        //     }
-        //     saveNewPR(newPR);
-        // }
-
+        //if user surpasses a set goal, alert the observer subscribed to that goal
         if (Number(this.state.weight) >= Number(this.lift.goal)) {
-            alert("Goal Achieved!");
-//            let newGoal = {
-//                goalData: Number(this.state.weight) + 10,
-//                name: this.lift.name
-//            }
-//            saveNewGoal(newGoal);
+            alertObserver();
         }
 
     }

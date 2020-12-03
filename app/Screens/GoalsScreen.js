@@ -5,7 +5,7 @@ import {loadLift, getAllLifts} from "../Storage/saveLifts";
 import Factory from "../Factory/Factory";
 import {HeaderTitle} from "@react-navigation/stack";
 
-
+//Display the lifts in order for user to edit goals
 class GoalsScreen extends React.Component {
 
     lifts;
@@ -22,7 +22,6 @@ class GoalsScreen extends React.Component {
             shoulderLiftCards: [],
             backLiftCards: [],
             armLiftCards: [],
-            workoutLifts: []
         };
 
     }
@@ -44,6 +43,7 @@ class GoalsScreen extends React.Component {
             ArmsLiftCards: [],
         };
 
+        //When lift card is clicked, go to the edit goal page
         for (let key of keys) {
             let holder = await loadLift(key);
             const item = holder[key];
@@ -59,6 +59,7 @@ class GoalsScreen extends React.Component {
         return liftCards;
     }
 
+    //show lift cards corresponding to individual muscle groups
     showChest() {
         if (this.state.chestLiftCards.length > 0) {
             return <View>

@@ -5,6 +5,8 @@ import {HeaderTitle} from "@react-navigation/stack";
 import {Input} from 'react-native-elements';
 import {saveLiftData, saveNewPR, saveNewGoal} from "../Storage/saveLifts";
 
+//Screen to edit the goal of a lift once the previous goal has been surpassed.
+//Also acts as subscriber for the observer pattern to alert the user when they've reached a goal.
 class EditGoalScreen extends React.Component {
 
     lift;
@@ -16,7 +18,11 @@ class EditGoalScreen extends React.Component {
     constructor(props) {
         super(props);
         this.lift = props.route.params.items;
+
+        //keep track of how close user is to goal
         this.percentComplete = ((Number(this.lift.pr) / Number(this.lift.goal)) * 100).toFixed(2);
+
+        //Change color of text if goal is achieved
         if (Number(this.percentComplete) >= 100.00) {
             this.isAchieved = 'Achieved!';
             this.textColor = 'green';
@@ -27,16 +33,16 @@ class EditGoalScreen extends React.Component {
 
         this.state = {goal: ''};
         this.handleGoalChange = this.handleGoalChange.bind(this);
-        //this.handlePRChange = this.handlePRChange.bind(this);
-        //this.handleRepChange = this.handleRepChange.bind(this);
-        //this.handleWeightChange = this.handleWeightChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+
     }
 
+    //handle input in the New Goal text field
     handleGoalChange(goal) {
         this.setState({goal})
     }
 
+    //Save the new goal when user clicks 'save'
     handleSubmit() {
 
         if (this.state.goal > this.lift.pr) {
@@ -78,6 +84,11 @@ class EditGoalScreen extends React.Component {
         )
     }
 }
+
+//observer will alert user if the goal it is subscribed to is achieved
+export const alertObserver = function() {
+    alert('Goal Achieved!');
+};
 
 const renderItem = ({item}) => (
     <Text>{item}</Text>
