@@ -5,11 +5,18 @@ import {Card} from 'react-native-elements'
 
 class LiftCard extends React.Component {
     goTo;
+    textColor;
 
     constructor(props, {type}) {
         super(props);
         this.type = type;
-        this.goTo = this.props.item.goTo;}
+        this.goTo = this.props.item.goTo;
+        if (this.props.item.pr >= this.props.item.goal) {
+           this.textColor = 'green';
+        } else {
+            this.textColor = 'red';
+        }
+    }
 
     showDescription() {
         if (this.props.item.description.length > 0) {
@@ -48,7 +55,7 @@ class LiftCard extends React.Component {
                         items: this.props.item
                     })}>
                     <Card>
-                        <Card.Title>{this.props.item.name}</Card.Title>
+                        <Card.Title style={{color: this.textColor}}>{this.props.item.name}</Card.Title>
                         {/*<Card.Divider/>*/}
                         {/*{this.showDescription()}*/}
                         {/*{this.showMuscleGroup()}*/}

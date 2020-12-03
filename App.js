@@ -11,6 +11,8 @@ import LiftListScreen from "./app/Screens/LiftListScreen";
 import LiftCard from "./app/Factory/LiftCard";
 import CreateWorkoutScreen from "./app/Screens/CreateWorkoutScreen";
 import WorkoutListScreen from "./app/Screens/WorkoutListScreen";
+import GoalsScreen from "./app/Screens/GoalsScreen";
+import EditGoalScreen from "./app/Screens/EditGoalScreen";
 
 const Stack = createStackNavigator();
 
@@ -46,6 +48,14 @@ export default class App extends React.Component {
                     <Stack.Screen
                         name="Workout List"
                         component={WorkoutListScreen}
+                    />
+                    <Stack.Screen
+                        name="Goal List"
+                        component={GoalsScreen}
+                    />
+                    <Stack.Screen
+                        name="Edit Goal"
+                        component={EditGoalScreen}
                     />
                 </Stack.Navigator>
             </NavigationContainer>
