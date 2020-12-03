@@ -16,13 +16,20 @@ export const saveLift = async (lift) => {
 export const saveLiftData = async (data) => {
     let name = data.name;
     let date = data.date;
+
     console.log(data);
     delete data['name'];
     delete data['date'];
     let lift = await AsyncStorage.getItem(name);
     lift = JSON.parse(lift);
+    console.log(data);
+    if(data['prData']){
+        lift[name]['pr'] = Number(data['prData']);
+        delete data['prData']
+    }
     let liftPerfs = lift[name]['data'];
     liftPerfs[date] = data.stats;
+    console.log(lift);
     AsyncStorage.setItem(name, JSON.stringify(lift));
 
 };

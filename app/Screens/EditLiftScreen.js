@@ -30,7 +30,7 @@ class EditLiftScreen extends React.Component {
 
     handlePRChange(newPR) {
         // lift.pr = newPR;
-        this.setState({pr});
+        // this.setState({pr: newPR});
     }
 
     handleSetChange(set) {
@@ -57,18 +57,23 @@ class EditLiftScreen extends React.Component {
                 date: this.getTime()
 
             }
+
+            if(Number(this.state.weight) > Number(this.state.pr)){
+                newPerf['prData'] = this.state.weight;
+            }
+            console.log(newPerf);
             saveLiftData(newPerf);
         }
 
-        if (this.state.weight > this.state.pr) {
-            let newPR = {
-                prData: this.state.weight,
-                name: this.lift.name
-            }
-            saveNewPR(newPR);
-        }
+        // if (this.state.weight > this.state.pr) {
+        //     let newPR = {
+        //         prData: this.state.weight,
+        //         name: this.lift.name
+        //     }
+        //     saveNewPR(newPR);
+        // }
 
-        if (this.state.weight >= this.lift.goal) {
+        if (Number(this.state.weight) >= Number(this.lift.goal)) {
             alert("Goal Achieved!");
 //            let newGoal = {
 //                goalData: Number(this.state.weight) + 10,
