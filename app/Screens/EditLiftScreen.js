@@ -3,7 +3,7 @@ import {ScrollView, StyleSheet, Text, TouchableOpacity, View, FlatList, SafeArea
 import {Card} from 'react-native-elements'
 import {HeaderTitle} from "@react-navigation/stack";
 import {Input} from 'react-native-elements';
-import {saveLiftData, saveNewPR} from "../Storage/saveLifts";
+import {saveLiftData, saveNewPR, saveNewGoal} from "../Storage/saveLifts";
 
 
 
@@ -70,6 +70,11 @@ class EditLiftScreen extends React.Component {
 
         if (this.state.weight >= this.lift.goal) {
             alert("Goal Achieved!");
+//            let newGoal = {
+//                goalData: Number(this.state.weight) + 10,
+//                name: this.lift.name
+//            }
+//            saveNewGoal(newGoal);
         }
 
     }

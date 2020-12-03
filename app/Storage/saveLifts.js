@@ -36,9 +36,23 @@ export const saveNewPR = async (newPR) => {
     lift[name]['pr'] = newPR.prData;
     AsyncStorage.setItem(name, JSON.stringify(lift));
 
-    let lift2 = await AsyncStorage.getItem(name);
-    lift2 = JSON.parse(lift2);
-    AsyncStorage.setItem(name, JSON.stringify(lift2));
+//    let lift2 = await AsyncStorage.getItem(name);
+//    lift2 = JSON.parse(lift2);
+//    AsyncStorage.setItem(name, JSON.stringify(lift2));
+};
+
+//create new goal after old one is achieved
+export const saveNewGoal = async (newGoal) => {
+    let name = newGoal.name;
+    delete newGoal['name'];
+    let lift = await AsyncStorage.getItem(name);
+    lift = JSON.parse(lift);
+    lift[name]['goal'] = newGoal.goalData;
+    AsyncStorage.setItem(name, JSON.stringify(lift));
+
+//    let lift3 = await AsyncStorage.getItem(name);
+//    lift3 = JSON.parse(lift3);
+//    AsyncStorage.setItem(name, JSON.stringify(lift3));
 };
 
 //loads items given a key
